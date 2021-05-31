@@ -1,0 +1,3 @@
+# !/usr/bin/sh
+
+exec /usr/bin/python ijkcompiler.py $1

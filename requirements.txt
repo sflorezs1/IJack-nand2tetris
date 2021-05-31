@@ -1,0 +1,2 @@
+more-itertools==8.8.0
+ply==3.11

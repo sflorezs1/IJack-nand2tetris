@@ -1,0 +1,6 @@
+class Main:
+    fun main() -> void:
+        var Pong game
+        let game = Pong.new()
+        do game.run()
+        return

@@ -1,0 +1,42 @@
+class Vector:
+    field num x, y
+
+    init new(num newX, num newY) -> Vector:
+        let x = newX
+        let y = newY
+        return self
+
+    method dispose() -> void:
+        do Memory.deAlloc(self)
+        return
+
+    method getX() -> num:
+        return x
+
+    method setX(num newX) -> void:
+        let x = newX
+        return
+
+    method getY() -> num:
+        return y
+
+    method setY(num newY) -> void:
+        let y = newY
+        return
+
+    method set(Vector other) -> void:
+        let x = other.getX()
+        let y = other.getY()
+        do other.dispose()
+        return
+
+    fun sum(Vector one, Vector other) -> Vector:
+        return Vector.new(one.getX() + other.getX(), one.getY() + other.getY())
+
+    method print() -> void:
+        do Output.printChar(40)
+        do Output.printInt(x)
+        do Output.printString(", ")
+        do Output.printInt(y)
+        do Output.printChar(41)
+        return

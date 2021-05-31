@@ -1,0 +1,222 @@
+class Pong:
+    field num fontSize, leftmostPos, rightmostPos
+    field Player p1, p2
+    field Ball ball
+    field Scoreboard sb
+    field Vector sbp1pos, sbp2pos
+
+    init new() -> Pong:
+        let fontSize = 1
+        let leftmostPos = 4
+        let rightmostPos = 507
+        let p1 = Player.new(Vector.new(0, 112), 30, leftmostPos)
+        let p2 = Player.new(Vector.new(rightmostPos, 112), 30, leftmostPos)
+        let ball = Ball.new()
+        let sbp1pos = Vector.new(222, 10)
+        let sbp2pos = Vector.new(259, 10)
+        let sb = Scoreboard.new(sbp1pos, sbp2pos)
+        return self
+
+    method dispose() -> void:
+        do p1.dispose()
+        do p2.dispose()
+        do ball.dispose()
+        do Memory.deAlloc(self)
+        return
+
+    method drawCenterLine() -> void:
+        do Screen.setColor(true)
+        do Screen.drawLine(254, 0, 254, 254)
+
+        return
+
+    method drawScoreBoard() -> void:
+        do sb.drawP1Score()
+        do sb.drawP2Score()
+        return
+
+    method mainLoop() -> void:
+        var char keypress
+        var bool exit, hits
+        var num newMoveX, newMoveY, p1top, p1mid, p2top, p2mid
+        var Vector position, p1start, p2start, movement
+
+        let exit = false
+
+        while (!exit):
+            let keypress = Keyboard.keyPressed()
+
+            if (keypress = 81):
+                let exit = true
+
+            # Move Player One
+            if (keypress = 87):   # 'W' is pressed
+                do p1.moveUp()
+            else:
+                if (keypress = 83):   # 'S' is pressed
+                    do p1.moveDown()
+
+            # Move Player Two
+            if (keypress = 131):   # 'Arrow Up' is pressed
+                do p2.moveUp()
+            else:
+                if (keypress = 133): # 'Arrow Down' is pressed
+                    do p2.moveDown()
+
+            # Check collisions
+            let position = ball.getPosition()
+            let movement = ball.getMovement()
+            let newMoveX = position.getX() + movement.getX()
+            let newMoveY = position.getY() + movement.getY()
+            let p1start = p1.getStart()
+            let p2start = p2.getStart()
+            let p1top = p1.getLength() / 3
+            let p1mid = 2 * (p1.getLength() / 3)
+            let p2top = p2.getLength() / 3
+            let p2mid = 2 * (p2.getLength() / 3)
+
+            if (((newMoveY - ball.getRadius()) < 1) | ((newMoveY + ball.getRadius()) > 254)): # Check if bounces on top or bottom
+                do movement.setY(-1 * movement.getY()) # Flip movement vector vertically
+
+            if ((newMoveX - ball.getRadius()) < leftmostPos): # Check if bounces on left side
+                # Top
+                if (((position.getY() + ball.getRadius()) > p1start.getY()) & ((position.getY() - ball.getRadius()) < (p1start.getY() + p1top))):
+                    let hits = true
+                    do movement.setY(-1)
+                    do movement.setX(-1 * movement.getX())
+                else:
+                    # Mid
+                    if (((position.getY() + ball.getRadius()) > (p1start.getY() + p1top)) & ((position.getY() - ball.getRadius()) < (p1start.getY() + p1mid))):
+                        let hits = true
+                        do movement.setY(0)
+                        do movement.setX(-1 * movement.getX())
+                    else:
+                        # Bot
+                        if (((position.getY() + ball.getRadius()) > (p1start.getY() + p1mid)) & ((position.getY() - ball.getRadius()) < (p1start.getY() + p1.getLength()))):
+                            let hits = true
+                            do movement.setY(1)
+                            do movement.setX(-1 * movement.getX())
+
+                # Check if does not hit
+                if (!hits):
+                    do sb.augmentp2()
+                    do ball.reset()
+                    do p1.resetSize()
+                    do p2.resetSize()
+                else:
+                    do p1.increaseSize()
+                    do checkResetBars()
+
+                let hits = false   # Restart hit flag
+
+            if ((newMoveX + ball.getRadius()) > rightmostPos): # Check if bounces on right side
+                # Top
+                if (((position.getY() + ball.getRadius()) > p2start.getY()) & ((position.getY() - ball.getRadius()) < (p2start.getY() + p2top))):
+                    let hits = true
+                    do movement.setY(-1)
+                    do movement.setX(-1 * movement.getX())
+                else:
+                    # Mid
+                    if (((position.getY() + ball.getRadius()) > (p2start.getY() + p2top)) & ((position.getY() - ball.getRadius()) < (p2start.getY() + p2mid))):
+                        let hits = true
+                        do movement.setY(0)
+                        do movement.setX(-1 * movement.getX())
+                    else:
+                        # Bot
+                        if (((position.getY() + ball.getRadius()) > (p2start.getY() + p2mid)) & ((position.getY() - ball.getRadius()) < (p2start.getY() + p2.getLength()))):
+                            let hits = true
+                            do movement.setY(1)
+                            do movement.setX(-1 * movement.getX())
+
+                # Check if does not hit
+                if (!hits):
+                    do sb.augmentp1()
+                    do ball.reset()
+                    do p1.resetSize()
+                    do p2.resetSize()
+                else:
+                    do p2.increaseSize()
+                    do checkResetBars()
+
+            let hits = false   # Restart hit flag
+
+            do ball.move()
+
+            # Redraws
+            do redrawCenterlineIfErased(position)
+            do redrawScoreBoardIfErased(position)
+
+            do checkBallAdvantage()
+
+            do p1.draw()
+            do p2.draw()
+            do Sys.wait(5)
+
+            if (sb.checkWin()):
+                return
+
+        return
+
+    method run() -> void:
+        do p1.draw()
+        do p2.draw()
+        do ball.draw()
+        do drawCenterLine()
+        do drawScoreBoard()
+        do mainLoop()
+        return
+
+    method checkResetBars() -> void:
+        if (p1.getIsMaxLength() | p2.getIsMaxLength()):
+            if (p1.getLength() > (p2.getLength() + 10)):
+                do sb.augmentp1()
+
+            if (p2.getLength() > (p1.getLength() + 10)):
+                do sb.augmentp2()
+
+            do p1.resetSize()
+            do p2.resetSize()
+            do ball.reset()
+
+        return
+
+    method checkBallAdvantage() -> void:
+        var Vector ballpos
+        let ballpos = ball.getPosition()
+
+        if (sb.getP1Score() > (sb.getP2Score() + 2)):
+            if (ballpos.getX() > 254):
+                # numernal check done in Ball Class
+                do ball.doubleSize()
+            else:
+                do ball.normalSize()
+
+        if (sb.getP2Score() > (sb.getP1Score() + 2)):
+            if (ballpos.getX() < 255):
+                # numernal check done in Ball Class
+                do ball.doubleSize()
+            else:
+                do ball.normalSize()
+
+        return
+
+
+    method redrawCenterlineIfErased(Vector position) -> void:
+        # redraw centerline if erased by ball
+        if (((position.getX() + ball.getRadius()) > 252) & ((position.getX() - ball.getRadius()) < 256)):
+            do drawCenterLine()
+        return
+
+    method redrawScoreBoardIfErased(Vector position) -> void:
+        # redraw scoreboard if erased by ball
+        if (((position.getX() + ball.getRadius()) > (sbp1pos.getX() - 2)) & ((position.getX() - ball.getRadius()) < (sbp1pos.getX() + 34))):
+            if (((position.getY() + ball.getRadius()) < (sbp1pos.getY() + 1)) & ((position.getY() - ball.getRadius()) > (sbp1pos.getY() - 1))):
+                do drawScoreBoard()
+                do Output.printChar(65)
+
+        if (((position.getX() + ball.getRadius()) > (sbp2pos.getX() - 2)) & ((position.getX() - ball.getRadius()) < (sbp2pos.getX() + 34))):
+            if (((position.getY() + ball.getRadius()) < (sbp2pos.getY() + 1)) & ((position.getY() - ball.getRadius()) > (sbp2pos.getY() - 1))):
+                do drawScoreBoard()
+                do Output.printChar(65)
+
+        return

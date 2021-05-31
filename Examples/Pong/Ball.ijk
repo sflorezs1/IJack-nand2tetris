@@ -1,0 +1,71 @@
+class Ball:
+    field num radius, baseRadius
+    field Vector position
+    field Vector movement
+    static Vector center
+
+    init new() -> Ball:
+        let radius = 3
+        let baseRadius = radius
+        let position = Vector.new(254, 127)
+        let movement = Vector.new(1, 1)
+        let center = Vector.new(254, 127)
+        return self
+
+    method dispose() -> void:
+        do position.dispose()
+        do Memory.deAlloc(this)
+        return
+
+    method getPosition() -> Vector:
+        return position
+
+    method getMovement() -> Vector:
+        return movement
+
+    method getRadius() -> num:
+        return radius
+
+    method draw() -> void:
+        do Screen.setColor(true)
+        do Screen.drawCircle(position.getX(), position.getY(), radius)
+        return
+
+    method erase() -> void:
+        do Screen.setColor(false)
+        do Screen.drawCircle(position.getX(), position.getY(), radius)
+        return
+
+    method reset() -> void:
+        do Screen.setColor(false)
+        do Screen.drawCircle(position.getX(), position.getY(), radius)
+        do position.setX(center.getX())
+        do position.setY(center.getY())
+        do movement.setX(1)
+        do movement.setY(1)
+        return
+
+    method move() -> void:
+        do Screen.setColor(false)
+        do Screen.drawCircle(position.getX(), position.getY(), radius)
+    
+        do position.set(Vector.sum(position, movement))
+    
+        do Screen.setColor(true)
+        do Screen.drawCircle(position.getX(), position.getY(), radius)
+    
+        return
+
+    method doubleSize() -> void:
+        if (radius = baseRadius):
+            do erase()
+            let radius = 2 * radius
+            do draw()
+        return
+
+    method normalSize() -> void:
+        if (!(radius = baseRadius)):
+            do erase()
+            let radius = baseRadius
+            do draw()
+        return

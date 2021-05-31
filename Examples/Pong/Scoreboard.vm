@@ -1,0 +1,682 @@
+function Scoreboard.new 0
+push constant 4
+call Memory.alloc 1
+pop pointer 0
+push constant 0
+pop this 0
+push constant 0
+pop this 1
+push argument 0
+pop this 2
+push argument 1
+pop this 3
+push pointer 0
+return
+function Scoreboard.getP1Score 0
+push argument 0
+pop pointer 0
+push this 0
+return
+function Scoreboard.getP2Score 0
+push argument 0
+pop pointer 0
+push this 1
+return
+function Scoreboard.augmentp1 0
+push argument 0
+pop pointer 0
+push pointer 0
+push this 2
+call Scoreboard.erase 2
+pop temp 0
+push this 0
+push constant 1
+add
+pop this 0
+push pointer 0
+call Scoreboard.drawP1Score 1
+pop temp 0
+push constant 0
+return
+function Scoreboard.augmentp2 0
+push argument 0
+pop pointer 0
+push pointer 0
+push this 3
+call Scoreboard.erase 2
+pop temp 0
+push this 1
+push constant 1
+add
+pop this 1
+push pointer 0
+call Scoreboard.drawP2Score 1
+pop temp 0
+push constant 0
+return
+function Scoreboard.checkWin 0
+push argument 0
+pop pointer 0
+push this 0
+push constant 5
+gt
+not
+if-goto L8
+call Screen.clearScreen 0
+pop temp 0
+push constant 15
+call String.new 1
+push constant 80
+call String.appendChar 2
+push constant 108
+call String.appendChar 2
+push constant 97
+call String.appendChar 2
+push constant 121
+call String.appendChar 2
+push constant 101
+call String.appendChar 2
+push constant 114
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 79
+call String.appendChar 2
+push constant 110
+call String.appendChar 2
+push constant 101
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 87
+call String.appendChar 2
+push constant 105
+call String.appendChar 2
+push constant 110
+call String.appendChar 2
+push constant 115
+call String.appendChar 2
+call Output.printString 1
+pop temp 0
+push constant 2000
+call Sys.wait 1
+pop temp 0
+push constant 0
+not
+return
+goto L9
+label L8
+label L9
+push this 1
+push constant 5
+gt
+not
+if-goto L10
+call Screen.clearScreen 0
+pop temp 0
+push constant 15
+call String.new 1
+push constant 80
+call String.appendChar 2
+push constant 108
+call String.appendChar 2
+push constant 97
+call String.appendChar 2
+push constant 121
+call String.appendChar 2
+push constant 101
+call String.appendChar 2
+push constant 114
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 84
+call String.appendChar 2
+push constant 119
+call String.appendChar 2
+push constant 111
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 87
+call String.appendChar 2
+push constant 105
+call String.appendChar 2
+push constant 110
+call String.appendChar 2
+push constant 115
+call String.appendChar 2
+call Output.printString 1
+pop temp 0
+push constant 2000
+call Sys.wait 1
+pop temp 0
+push constant 0
+not
+return
+goto L11
+label L10
+label L11
+push constant 0
+return
+function Scoreboard.erase 0
+push argument 0
+pop pointer 0
+push constant 0
+call Screen.setColor 1
+pop temp 0
+push argument 1
+call Vector.getX 1
+push constant 4
+add
+push argument 1
+call Vector.getY 1
+push argument 1
+call Vector.getX 1
+push constant 24
+add
+push argument 1
+call Vector.getY 1
+push constant 32
+add
+call Screen.drawRectangle 4
+pop temp 0
+push constant 0
+return
+function Scoreboard.drawZero 0
+push argument 0
+pop pointer 0
+push constant 0
+not
+call Screen.setColor 1
+pop temp 0
+push argument 1
+call Vector.getX 1
+push constant 4
+add
+push argument 1
+call Vector.getY 1
+push argument 1
+call Vector.getX 1
+push constant 24
+add
+push argument 1
+call Vector.getY 1
+push constant 32
+add
+call Screen.drawRectangle 4
+pop temp 0
+push constant 0
+call Screen.setColor 1
+pop temp 0
+push argument 1
+call Vector.getX 1
+push constant 9
+add
+push argument 1
+call Vector.getY 1
+push constant 5
+add
+push argument 1
+call Vector.getX 1
+push constant 19
+add
+push argument 1
+call Vector.getY 1
+push constant 27
+add
+call Screen.drawRectangle 4
+pop temp 0
+push constant 0
+return
+function Scoreboard.drawOne 0
+push argument 0
+pop pointer 0
+push constant 0
+not
+call Screen.setColor 1
+pop temp 0
+push argument 1
+call Vector.getX 1
+push constant 4
+add
+push argument 1
+call Vector.getY 1
+push argument 1
+call Vector.getX 1
+push constant 24
+add
+push argument 1
+call Vector.getY 1
+push constant 32
+add
+call Screen.drawRectangle 4
+pop temp 0
+push constant 0
+call Screen.setColor 1
+pop temp 0
+push argument 1
+call Vector.getX 1
+push constant 4
+add
+push argument 1
+call Vector.getY 1
+push argument 1
+call Vector.getX 1
+push constant 19
+add
+push argument 1
+call Vector.getY 1
+push constant 32
+add
+call Screen.drawRectangle 4
+pop temp 0
+push constant 0
+return
+function Scoreboard.drawTwo 0
+push argument 0
+pop pointer 0
+push constant 0
+not
+call Screen.setColor 1
+pop temp 0
+push argument 1
+call Vector.getX 1
+push constant 4
+add
+push argument 1
+call Vector.getY 1
+push argument 1
+call Vector.getX 1
+push constant 24
+add
+push argument 1
+call Vector.getY 1
+push constant 32
+add
+call Screen.drawRectangle 4
+pop temp 0
+push constant 0
+call Screen.setColor 1
+pop temp 0
+push argument 1
+call Vector.getX 1
+push constant 4
+add
+push argument 1
+call Vector.getY 1
+push constant 5
+add
+push argument 1
+call Vector.getX 1
+push constant 19
+add
+push argument 1
+call Vector.getY 1
+push constant 13
+add
+call Screen.drawRectangle 4
+pop temp 0
+push argument 1
+call Vector.getX 1
+push constant 9
+add
+push argument 1
+call Vector.getY 1
+push constant 19
+add
+push argument 1
+call Vector.getX 1
+push constant 24
+add
+push argument 1
+call Vector.getY 1
+push constant 27
+add
+call Screen.drawRectangle 4
+pop temp 0
+push constant 0
+return
+function Scoreboard.drawThree 0
+push argument 0
+pop pointer 0
+push constant 0
+not
+call Screen.setColor 1
+pop temp 0
+push argument 1
+call Vector.getX 1
+push constant 4
+add
+push argument 1
+call Vector.getY 1
+push argument 1
+call Vector.getX 1
+push constant 24
+add
+push argument 1
+call Vector.getY 1
+push constant 32
+add
+call Screen.drawRectangle 4
+pop temp 0
+push constant 0
+call Screen.setColor 1
+pop temp 0
+push argument 1
+call Vector.getX 1
+push constant 4
+add
+push argument 1
+call Vector.getY 1
+push constant 5
+add
+push argument 1
+call Vector.getX 1
+push constant 19
+add
+push argument 1
+call Vector.getY 1
+push constant 13
+add
+call Screen.drawRectangle 4
+pop temp 0
+push argument 1
+call Vector.getX 1
+push constant 4
+add
+push argument 1
+call Vector.getY 1
+push constant 19
+add
+push argument 1
+call Vector.getX 1
+push constant 19
+add
+push argument 1
+call Vector.getY 1
+push constant 27
+add
+call Screen.drawRectangle 4
+pop temp 0
+push constant 0
+return
+function Scoreboard.drawFour 0
+push argument 0
+pop pointer 0
+push constant 0
+not
+call Screen.setColor 1
+pop temp 0
+push argument 1
+call Vector.getX 1
+push constant 4
+add
+push argument 1
+call Vector.getY 1
+push argument 1
+call Vector.getX 1
+push constant 24
+add
+push argument 1
+call Vector.getY 1
+push constant 32
+add
+call Screen.drawRectangle 4
+pop temp 0
+push constant 0
+call Screen.setColor 1
+pop temp 0
+push argument 1
+call Vector.getX 1
+push constant 9
+add
+push argument 1
+call Vector.getY 1
+push argument 1
+call Vector.getX 1
+push constant 19
+add
+push argument 1
+call Vector.getY 1
+push constant 13
+add
+call Screen.drawRectangle 4
+pop temp 0
+push argument 1
+call Vector.getX 1
+push constant 4
+add
+push argument 1
+call Vector.getY 1
+push constant 19
+add
+push argument 1
+call Vector.getX 1
+push constant 19
+add
+push argument 1
+call Vector.getY 1
+push constant 32
+add
+call Screen.drawRectangle 4
+pop temp 0
+push constant 0
+return
+function Scoreboard.drawFive 0
+push argument 0
+pop pointer 0
+push constant 0
+not
+call Screen.setColor 1
+pop temp 0
+push argument 1
+call Vector.getX 1
+push constant 4
+add
+push argument 1
+call Vector.getY 1
+push argument 1
+call Vector.getX 1
+push constant 24
+add
+push argument 1
+call Vector.getY 1
+push constant 32
+add
+call Screen.drawRectangle 4
+pop temp 0
+push constant 0
+call Screen.setColor 1
+pop temp 0
+push argument 1
+call Vector.getX 1
+push constant 4
+add
+push argument 1
+call Vector.getY 1
+push constant 19
+add
+push argument 1
+call Vector.getX 1
+push constant 19
+add
+push argument 1
+call Vector.getY 1
+push constant 27
+add
+call Screen.drawRectangle 4
+pop temp 0
+push argument 1
+call Vector.getX 1
+push constant 9
+add
+push argument 1
+call Vector.getY 1
+push constant 5
+add
+push argument 1
+call Vector.getX 1
+push constant 24
+add
+push argument 1
+call Vector.getY 1
+push constant 13
+add
+call Screen.drawRectangle 4
+pop temp 0
+push constant 0
+return
+function Scoreboard.drawP1Score 0
+push argument 0
+pop pointer 0
+push this 0
+push constant 0
+eq
+not
+if-goto L12
+push pointer 0
+push this 2
+call Scoreboard.drawZero 2
+pop temp 0
+goto L13
+label L12
+label L13
+push this 0
+push constant 1
+eq
+not
+if-goto L14
+push pointer 0
+push this 2
+call Scoreboard.drawOne 2
+pop temp 0
+goto L15
+label L14
+label L15
+push this 0
+push constant 2
+eq
+not
+if-goto L16
+push pointer 0
+push this 2
+call Scoreboard.drawTwo 2
+pop temp 0
+goto L17
+label L16
+label L17
+push this 0
+push constant 3
+eq
+not
+if-goto L18
+push pointer 0
+push this 2
+call Scoreboard.drawThree 2
+pop temp 0
+goto L19
+label L18
+label L19
+push this 0
+push constant 4
+eq
+not
+if-goto L20
+push pointer 0
+push this 2
+call Scoreboard.drawFour 2
+pop temp 0
+goto L21
+label L20
+label L21
+push this 0
+push constant 5
+eq
+not
+if-goto L22
+push pointer 0
+push this 2
+call Scoreboard.drawFive 2
+pop temp 0
+goto L23
+label L22
+label L23
+push constant 0
+return
+function Scoreboard.drawP2Score 0
+push argument 0
+pop pointer 0
+push this 1
+push constant 0
+eq
+not
+if-goto L24
+push pointer 0
+push this 3
+call Scoreboard.drawZero 2
+pop temp 0
+goto L25
+label L24
+label L25
+push this 1
+push constant 1
+eq
+not
+if-goto L26
+push pointer 0
+push this 3
+call Scoreboard.drawOne 2
+pop temp 0
+goto L27
+label L26
+label L27
+push this 1
+push constant 2
+eq
+not
+if-goto L28
+push pointer 0
+push this 3
+call Scoreboard.drawTwo 2
+pop temp 0
+goto L29
+label L28
+label L29
+push this 1
+push constant 3
+eq
+not
+if-goto L30
+push pointer 0
+push this 3
+call Scoreboard.drawThree 2
+pop temp 0
+goto L31
+label L30
+label L31
+push this 1
+push constant 4
+eq
+not
+if-goto L32
+push pointer 0
+push this 3
+call Scoreboard.drawFour 2
+pop temp 0
+goto L33
+label L32
+label L33
+push this 1
+push constant 5
+eq
+not
+if-goto L34
+push pointer 0
+push this 3
+call Scoreboard.drawFive 2
+pop temp 0
+goto L35
+label L34
+label L35
+return

@@ -1,0 +1,188 @@
+function Ball.new 0
+push constant 4
+call Memory.alloc 1
+pop pointer 0
+push constant 3
+pop this 0
+push this 0
+pop this 1
+push constant 254
+push constant 127
+call Vector.new 2
+pop this 2
+push constant 1
+push constant 1
+call Vector.new 2
+pop this 3
+push constant 254
+push constant 127
+call Vector.new 2
+pop static 0
+push pointer 0
+return
+function Ball.dispose 0
+push argument 0
+pop pointer 0
+push this 2
+call Vector.dispose 1
+pop temp 0
+push argument 0
+call Memory.deAlloc 1
+pop temp 0
+push constant 0
+return
+function Ball.getPosition 0
+push argument 0
+pop pointer 0
+push this 2
+return
+function Ball.getMovement 0
+push argument 0
+pop pointer 0
+push this 3
+return
+function Ball.getRadius 0
+push argument 0
+pop pointer 0
+push this 0
+return
+function Ball.draw 0
+push argument 0
+pop pointer 0
+push constant 0
+not
+call Screen.setColor 1
+pop temp 0
+push this 2
+call Vector.getX 1
+push this 2
+call Vector.getY 1
+push this 0
+call Screen.drawCircle 3
+pop temp 0
+push constant 0
+return
+function Ball.erase 0
+push argument 0
+pop pointer 0
+push constant 0
+call Screen.setColor 1
+pop temp 0
+push this 2
+call Vector.getX 1
+push this 2
+call Vector.getY 1
+push this 0
+call Screen.drawCircle 3
+pop temp 0
+push constant 0
+return
+function Ball.reset 0
+push argument 0
+pop pointer 0
+push constant 0
+call Screen.setColor 1
+pop temp 0
+push this 2
+call Vector.getX 1
+push this 2
+call Vector.getY 1
+push this 0
+call Screen.drawCircle 3
+pop temp 0
+push this 2
+push static 0
+call Vector.getX 1
+call Vector.setX 2
+pop temp 0
+push this 2
+push static 0
+call Vector.getY 1
+call Vector.setY 2
+pop temp 0
+push this 3
+push constant 1
+call Vector.setX 2
+pop temp 0
+push this 3
+push constant 1
+call Vector.setY 2
+pop temp 0
+push constant 0
+return
+function Ball.move 0
+push argument 0
+pop pointer 0
+push constant 0
+call Screen.setColor 1
+pop temp 0
+push this 2
+call Vector.getX 1
+push this 2
+call Vector.getY 1
+push this 0
+call Screen.drawCircle 3
+pop temp 0
+push this 2
+push this 2
+push this 3
+call Vector.sum 2
+call Vector.set 2
+pop temp 0
+push constant 0
+not
+call Screen.setColor 1
+pop temp 0
+push this 2
+call Vector.getX 1
+push this 2
+call Vector.getY 1
+push this 0
+call Screen.drawCircle 3
+pop temp 0
+push constant 0
+return
+function Ball.doubleSize 0
+push argument 0
+pop pointer 0
+push this 0
+push this 1
+eq
+not
+if-goto L36
+push pointer 0
+call Ball.erase 1
+pop temp 0
+push constant 2
+push this 0
+call Math.multiply 2
+pop this 0
+push pointer 0
+call Ball.draw 1
+pop temp 0
+goto L37
+label L36
+label L37
+push constant 0
+return
+function Ball.normalSize 0
+push argument 0
+pop pointer 0
+push this 0
+push this 1
+eq
+not
+not
+if-goto L38
+push pointer 0
+call Ball.erase 1
+pop temp 0
+push this 1
+pop this 0
+push pointer 0
+call Ball.draw 1
+pop temp 0
+goto L39
+label L38
+label L39
+return

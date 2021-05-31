@@ -1,0 +1,124 @@
+class Scoreboard:
+    field num p1score, p2score
+    field Vector positionp1, positionp2
+
+    init new(Vector pp1, Vector pp2) -> Scoreboard:
+        let p1score = 0
+        let p2score = 0
+        let positionp1 = pp1
+        let positionp2 = pp2
+        return self
+
+    method getP1Score() -> num:
+        return p1score
+    
+    method getP2Score() -> num:
+        return p2score
+
+    method augmentp1() -> void:
+        do erase(positionp1)
+        let p1score = p1score + 1
+        do drawP1Score()
+
+        return
+
+    method augmentp2() -> void:
+        do erase(positionp2)
+        let p2score = p2score + 1
+        do drawP2Score()
+        return
+
+    method checkWin() -> bool:
+        if (p1score > 5):
+            do Screen.clearScreen()
+            do Output.printString("Player One Wins")
+            do Sys.wait(2000)
+            return true
+        
+        if (p2score > 5):
+            do Screen.clearScreen()
+            do Output.printString("Player Two Wins")
+            do Sys.wait(2000)
+            return true
+        return false
+
+    method erase(Vector position) -> void:
+        do Screen.setColor(false)
+        do Screen.drawRectangle(position.getX() + 4, position.getY(), position.getX() + 24, position.getY() + 32)
+        return
+
+    method drawZero(Vector position) -> void:
+        do Screen.setColor(true)
+        do Screen.drawRectangle(position.getX() + 4, position.getY(), position.getX() + 24, position.getY() + 32)
+        do Screen.setColor(false)
+        do Screen.drawRectangle(position.getX() + 9, position.getY() + 5, position.getX() + 19, position.getY() + 27)
+        return
+
+    method drawOne(Vector position) -> void:
+        do Screen.setColor(true)
+        do Screen.drawRectangle(position.getX() + 4, position.getY(), position.getX() + 24, position.getY() + 32)
+        do Screen.setColor(false)
+        do Screen.drawRectangle(position.getX() + 4, position.getY(), position.getX() + 19, position.getY() + 32)
+        return
+
+    method drawTwo(Vector position) -> void:
+        do Screen.setColor(true)
+        do Screen.drawRectangle(position.getX() + 4, position.getY(), position.getX() + 24, position.getY() + 32)
+        do Screen.setColor(false)
+        do Screen.drawRectangle(position.getX() + 4, position.getY() + 5, position.getX() + 19, position.getY() + 13)
+        do Screen.drawRectangle(position.getX() + 9, position.getY() + 19, position.getX() + 24, position.getY() + 27)
+        return
+
+    method drawThree(Vector position) -> void:
+        do Screen.setColor(true)
+        do Screen.drawRectangle(position.getX() + 4, position.getY(), position.getX() + 24, position.getY() + 32)
+        do Screen.setColor(false)
+        do Screen.drawRectangle(position.getX() + 4, position.getY() + 5, position.getX() + 19, position.getY() + 13)
+        do Screen.drawRectangle(position.getX() + 4, position.getY() + 19, position.getX() + 19, position.getY() + 27)
+        return
+
+    method drawFour(Vector position) -> void:
+        do Screen.setColor(true)
+        do Screen.drawRectangle(position.getX() + 4, position.getY(), position.getX() + 24, position.getY() + 32)
+        do Screen.setColor(false)
+        do Screen.drawRectangle(position.getX() + 9, position.getY(), position.getX() + 19, position.getY() + 13)
+        do Screen.drawRectangle(position.getX() + 4, position.getY() + 19, position.getX() + 19, position.getY() + 32)
+        return
+
+    method drawFive(Vector position) -> void:
+        do Screen.setColor(true)
+        do Screen.drawRectangle(position.getX() + 4, position.getY(), position.getX() + 24, position.getY() + 32)
+        do Screen.setColor(false)
+        do Screen.drawRectangle(position.getX() + 4, position.getY() + 19, position.getX() + 19, position.getY() + 27)
+        do Screen.drawRectangle(position.getX() + 9, position.getY() + 5, position.getX() + 24, position.getY() + 13)
+        return
+
+    method drawP1Score() -> void:
+        if (p1score = 0):
+            do drawZero(positionp1)
+        if (p1score = 1):
+            do drawOne(positionp1)
+        if (p1score = 2):
+            do drawTwo(positionp1)
+        if (p1score = 3):
+            do drawThree(positionp1)
+        if (p1score = 4):
+            do drawFour(positionp1)
+        if (p1score = 5):
+            do drawFive(positionp1)
+        return
+
+    method drawP2Score() -> void:
+        if (p2score = 0):
+            do drawZero(positionp2)
+        if (p2score = 1):
+            do drawOne(positionp2)
+        if (p2score = 2):
+            do drawTwo(positionp2)
+        if (p2score = 3):
+            do drawThree(positionp2)
+        if (p2score = 4):
+            do drawFour(positionp2)
+        if (p2score = 5):
+            do drawFive(positionp2)
+        return

@@ -1,0 +1,870 @@
+function Pong.new 0
+push constant 9
+call Memory.alloc 1
+pop pointer 0
+push constant 1
+pop this 0
+push constant 4
+pop this 1
+push constant 507
+pop this 2
+push constant 0
+push constant 112
+call Vector.new 2
+push constant 30
+push this 1
+call Player.new 3
+pop this 3
+push this 2
+push constant 112
+call Vector.new 2
+push constant 30
+push this 1
+call Player.new 3
+pop this 4
+call Ball.new 0
+pop this 5
+push constant 222
+push constant 10
+call Vector.new 2
+pop this 7
+push constant 259
+push constant 10
+call Vector.new 2
+pop this 8
+push this 7
+push this 8
+call Scoreboard.new 2
+pop this 6
+push pointer 0
+return
+function Pong.dispose 0
+push argument 0
+pop pointer 0
+push this 3
+call Player.dispose 1
+pop temp 0
+push this 4
+call Player.dispose 1
+pop temp 0
+push this 5
+call Ball.dispose 1
+pop temp 0
+push pointer 0
+call Memory.deAlloc 1
+pop temp 0
+push constant 0
+return
+function Pong.drawCenterLine 0
+push argument 0
+pop pointer 0
+push constant 0
+not
+call Screen.setColor 1
+pop temp 0
+push constant 254
+push constant 0
+push constant 254
+push constant 254
+call Screen.drawLine 4
+pop temp 0
+push constant 0
+return
+function Pong.drawScoreBoard 0
+push argument 0
+pop pointer 0
+push this 6
+call Scoreboard.drawP1Score 1
+pop temp 0
+push this 6
+call Scoreboard.drawP2Score 1
+pop temp 0
+push constant 0
+return
+function Pong.mainLoop 13
+push argument 0
+pop pointer 0
+push constant 0
+pop local 1
+label L40
+push local 1
+not
+not
+if-goto L41
+call Keyboard.keyPressed 0
+pop local 0
+push local 0
+push constant 81
+eq
+not
+if-goto L42
+push constant 0
+not
+pop local 1
+goto L43
+label L42
+label L43
+push local 0
+push constant 87
+eq
+not
+if-goto L44
+push this 3
+call Player.moveUp 1
+pop temp 0
+goto L45
+label L44
+push local 0
+push constant 83
+eq
+not
+if-goto L46
+push this 3
+call Player.moveDown 1
+pop temp 0
+goto L47
+label L46
+label L47
+label L45
+push local 0
+push constant 131
+eq
+not
+if-goto L48
+push this 4
+call Player.moveUp 1
+pop temp 0
+goto L49
+label L48
+push local 0
+push constant 133
+eq
+not
+if-goto L50
+push this 4
+call Player.moveDown 1
+pop temp 0
+goto L51
+label L50
+label L51
+label L49
+push this 5
+call Ball.getPosition 1
+pop local 9
+push this 5
+call Ball.getMovement 1
+pop local 12
+push local 9
+call Vector.getX 1
+push local 12
+call Vector.getX 1
+add
+pop local 3
+push local 9
+call Vector.getY 1
+push local 12
+call Vector.getY 1
+add
+pop local 4
+push this 3
+call Player.getStart 1
+pop local 10
+push this 4
+call Player.getStart 1
+pop local 11
+push this 3
+call Player.getLength 1
+push constant 3
+call Math.divide 2
+pop local 5
+push constant 2
+push this 3
+call Player.getLength 1
+push constant 3
+call Math.divide 2
+call Math.multiply 2
+pop local 6
+push this 4
+call Player.getLength 1
+push constant 3
+call Math.divide 2
+pop local 7
+push constant 2
+push this 4
+call Player.getLength 1
+push constant 3
+call Math.divide 2
+call Math.multiply 2
+pop local 8
+push local 4
+push this 5
+call Ball.getRadius 1
+sub
+push constant 1
+lt
+push local 4
+push this 5
+call Ball.getRadius 1
+add
+push constant 254
+gt
+or
+not
+if-goto L52
+push local 12
+push constant 1
+neg
+push local 12
+call Vector.getY 1
+call Math.multiply 2
+call Vector.setY 2
+pop temp 0
+goto L53
+label L52
+label L53
+push local 3
+push this 5
+call Ball.getRadius 1
+sub
+push this 1
+lt
+not
+if-goto L54
+push local 9
+call Vector.getY 1
+push this 5
+call Ball.getRadius 1
+add
+push local 10
+call Vector.getY 1
+gt
+push local 9
+call Vector.getY 1
+push this 5
+call Ball.getRadius 1
+sub
+push local 10
+call Vector.getY 1
+push local 5
+add
+lt
+and
+not
+if-goto L56
+push constant 0
+not
+pop local 2
+push local 12
+push constant 1
+neg
+call Vector.setY 2
+pop temp 0
+push local 12
+push constant 1
+neg
+push local 12
+call Vector.getX 1
+call Math.multiply 2
+call Vector.setX 2
+pop temp 0
+goto L57
+label L56
+push local 9
+call Vector.getY 1
+push this 5
+call Ball.getRadius 1
+add
+push local 10
+call Vector.getY 1
+push local 5
+add
+gt
+push local 9
+call Vector.getY 1
+push this 5
+call Ball.getRadius 1
+sub
+push local 10
+call Vector.getY 1
+push local 6
+add
+lt
+and
+not
+if-goto L58
+push constant 0
+not
+pop local 2
+push local 12
+push constant 0
+call Vector.setY 2
+pop temp 0
+push local 12
+push constant 1
+neg
+push local 12
+call Vector.getX 1
+call Math.multiply 2
+call Vector.setX 2
+pop temp 0
+goto L59
+label L58
+push local 9
+call Vector.getY 1
+push this 5
+call Ball.getRadius 1
+add
+push local 10
+call Vector.getY 1
+push local 6
+add
+gt
+push local 9
+call Vector.getY 1
+push this 5
+call Ball.getRadius 1
+sub
+push local 10
+call Vector.getY 1
+push this 3
+call Player.getLength 1
+add
+lt
+and
+not
+if-goto L60
+push constant 0
+not
+pop local 2
+push local 12
+push constant 1
+call Vector.setY 2
+pop temp 0
+push local 12
+push constant 1
+neg
+push local 12
+call Vector.getX 1
+call Math.multiply 2
+call Vector.setX 2
+pop temp 0
+goto L61
+label L60
+label L61
+label L59
+label L57
+push local 2
+not
+not
+if-goto L62
+push this 6
+call Scoreboard.augmentp2 1
+pop temp 0
+push this 5
+call Ball.reset 1
+pop temp 0
+push this 3
+call Player.resetSize 1
+pop temp 0
+push this 4
+call Player.resetSize 1
+pop temp 0
+goto L63
+label L62
+push this 3
+call Player.increaseSize 1
+pop temp 0
+push pointer 0
+call Pong.checkResetBars 1
+pop temp 0
+label L63
+push constant 0
+pop local 2
+goto L55
+label L54
+label L55
+push local 3
+push this 5
+call Ball.getRadius 1
+add
+push this 2
+gt
+not
+if-goto L64
+push local 9
+call Vector.getY 1
+push this 5
+call Ball.getRadius 1
+add
+push local 11
+call Vector.getY 1
+gt
+push local 9
+call Vector.getY 1
+push this 5
+call Ball.getRadius 1
+sub
+push local 11
+call Vector.getY 1
+push local 7
+add
+lt
+and
+not
+if-goto L66
+push constant 0
+not
+pop local 2
+push local 12
+push constant 1
+neg
+call Vector.setY 2
+pop temp 0
+push local 12
+push constant 1
+neg
+push local 12
+call Vector.getX 1
+call Math.multiply 2
+call Vector.setX 2
+pop temp 0
+goto L67
+label L66
+push local 9
+call Vector.getY 1
+push this 5
+call Ball.getRadius 1
+add
+push local 11
+call Vector.getY 1
+push local 7
+add
+gt
+push local 9
+call Vector.getY 1
+push this 5
+call Ball.getRadius 1
+sub
+push local 11
+call Vector.getY 1
+push local 8
+add
+lt
+and
+not
+if-goto L68
+push constant 0
+not
+pop local 2
+push local 12
+push constant 0
+call Vector.setY 2
+pop temp 0
+push local 12
+push constant 1
+neg
+push local 12
+call Vector.getX 1
+call Math.multiply 2
+call Vector.setX 2
+pop temp 0
+goto L69
+label L68
+push local 9
+call Vector.getY 1
+push this 5
+call Ball.getRadius 1
+add
+push local 11
+call Vector.getY 1
+push local 8
+add
+gt
+push local 9
+call Vector.getY 1
+push this 5
+call Ball.getRadius 1
+sub
+push local 11
+call Vector.getY 1
+push this 4
+call Player.getLength 1
+add
+lt
+and
+not
+if-goto L70
+push constant 0
+not
+pop local 2
+push local 12
+push constant 1
+call Vector.setY 2
+pop temp 0
+push local 12
+push constant 1
+neg
+push local 12
+call Vector.getX 1
+call Math.multiply 2
+call Vector.setX 2
+pop temp 0
+goto L71
+label L70
+label L71
+label L69
+label L67
+push local 2
+not
+not
+if-goto L72
+push this 6
+call Scoreboard.augmentp1 1
+pop temp 0
+push this 5
+call Ball.reset 1
+pop temp 0
+push this 3
+call Player.resetSize 1
+pop temp 0
+push this 4
+call Player.resetSize 1
+pop temp 0
+goto L73
+label L72
+push this 4
+call Player.increaseSize 1
+pop temp 0
+push pointer 0
+call Pong.checkResetBars 1
+pop temp 0
+label L73
+goto L65
+label L64
+label L65
+push constant 0
+pop local 2
+push this 5
+call Ball.move 1
+pop temp 0
+push pointer 0
+push local 9
+call Pong.redrawCenterlineIfErased 2
+pop temp 0
+push pointer 0
+push local 9
+call Pong.redrawScoreBoardIfErased 2
+pop temp 0
+push pointer 0
+call Pong.checkBallAdvantage 1
+pop temp 0
+push this 3
+call Player.draw 1
+pop temp 0
+push this 4
+call Player.draw 1
+pop temp 0
+push constant 5
+call Sys.wait 1
+pop temp 0
+push this 6
+call Scoreboard.checkWin 1
+not
+if-goto L74
+push constant 0
+return
+goto L75
+label L74
+label L75
+goto L40
+label L41
+push constant 0
+return
+function Pong.run 0
+push argument 0
+pop pointer 0
+push this 3
+call Player.draw 1
+pop temp 0
+push this 4
+call Player.draw 1
+pop temp 0
+push this 5
+call Ball.draw 1
+pop temp 0
+push pointer 0
+call Pong.drawCenterLine 1
+pop temp 0
+push pointer 0
+call Pong.drawScoreBoard 1
+pop temp 0
+push pointer 0
+call Pong.mainLoop 1
+pop temp 0
+push constant 0
+return
+function Pong.checkResetBars 0
+push argument 0
+pop pointer 0
+push this 3
+call Player.getIsMaxLength 1
+push this 4
+call Player.getIsMaxLength 1
+or
+not
+if-goto L76
+push this 3
+call Player.getLength 1
+push this 4
+call Player.getLength 1
+push constant 10
+add
+gt
+not
+if-goto L78
+push this 6
+call Scoreboard.augmentp1 1
+pop temp 0
+goto L79
+label L78
+label L79
+push this 4
+call Player.getLength 1
+push this 3
+call Player.getLength 1
+push constant 10
+add
+gt
+not
+if-goto L80
+push this 6
+call Scoreboard.augmentp2 1
+pop temp 0
+goto L81
+label L80
+label L81
+push this 3
+call Player.resetSize 1
+pop temp 0
+push this 4
+call Player.resetSize 1
+pop temp 0
+push this 5
+call Ball.reset 1
+pop temp 0
+goto L77
+label L76
+label L77
+push constant 0
+return
+function Pong.checkBallAdvantage 1
+push argument 0
+pop pointer 0
+push this 5
+call Ball.getPosition 1
+pop local 0
+push this 6
+call Scoreboard.getP1Score 1
+push this 6
+call Scoreboard.getP2Score 1
+push constant 2
+add
+gt
+not
+if-goto L82
+push local 0
+call Vector.getX 1
+push constant 254
+gt
+not
+if-goto L84
+push this 5
+call Ball.doubleSize 1
+pop temp 0
+goto L85
+label L84
+push this 5
+call Ball.normalSize 1
+pop temp 0
+label L85
+goto L83
+label L82
+label L83
+push this 6
+call Scoreboard.getP2Score 1
+push this 6
+call Scoreboard.getP1Score 1
+push constant 2
+add
+gt
+not
+if-goto L86
+push local 0
+call Vector.getX 1
+push constant 255
+lt
+not
+if-goto L88
+push this 5
+call Ball.doubleSize 1
+pop temp 0
+goto L89
+label L88
+push this 5
+call Ball.normalSize 1
+pop temp 0
+label L89
+goto L87
+label L86
+label L87
+push constant 0
+return
+function Pong.redrawCenterlineIfErased 0
+push argument 0
+pop pointer 0
+push argument 1
+call Vector.getX 1
+push this 5
+call Ball.getRadius 1
+add
+push constant 252
+gt
+push argument 1
+call Vector.getX 1
+push this 5
+call Ball.getRadius 1
+sub
+push constant 256
+lt
+and
+not
+if-goto L90
+push pointer 0
+call Pong.drawCenterLine 1
+pop temp 0
+goto L91
+label L90
+label L91
+push constant 0
+return
+function Pong.redrawScoreBoardIfErased 0
+push argument 0
+pop pointer 0
+push argument 1
+call Vector.getX 1
+push this 5
+call Ball.getRadius 1
+add
+push this 7
+call Vector.getX 1
+push constant 2
+sub
+gt
+push argument 1
+call Vector.getX 1
+push this 5
+call Ball.getRadius 1
+sub
+push this 7
+call Vector.getX 1
+push constant 34
+add
+lt
+and
+not
+if-goto L92
+push argument 1
+call Vector.getY 1
+push this 5
+call Ball.getRadius 1
+add
+push this 7
+call Vector.getY 1
+push constant 1
+add
+lt
+push argument 1
+call Vector.getY 1
+push this 5
+call Ball.getRadius 1
+sub
+push this 7
+call Vector.getY 1
+push constant 1
+sub
+gt
+and
+not
+if-goto L94
+push pointer 0
+call Pong.drawScoreBoard 1
+pop temp 0
+push constant 65
+call Output.printChar 1
+pop temp 0
+goto L95
+label L94
+label L95
+goto L93
+label L92
+label L93
+push argument 1
+call Vector.getX 1
+push this 5
+call Ball.getRadius 1
+add
+push this 8
+call Vector.getX 1
+push constant 2
+sub
+gt
+push argument 1
+call Vector.getX 1
+push this 5
+call Ball.getRadius 1
+sub
+push this 8
+call Vector.getX 1
+push constant 34
+add
+lt
+and
+not
+if-goto L96
+push argument 1
+call Vector.getY 1
+push this 5
+call Ball.getRadius 1
+add
+push this 8
+call Vector.getY 1
+push constant 1
+add
+lt
+push argument 1
+call Vector.getY 1
+push this 5
+call Ball.getRadius 1
+sub
+push this 8
+call Vector.getY 1
+push constant 1
+sub
+gt
+and
+not
+if-goto L98
+push pointer 0
+call Pong.drawScoreBoard 1
+pop temp 0
+push constant 65
+call Output.printChar 1
+pop temp 0
+goto L99
+label L98
+label L99
+goto L97
+label L96
+label L97
+push constant 0
+return

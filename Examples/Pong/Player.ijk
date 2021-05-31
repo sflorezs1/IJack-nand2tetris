@@ -1,0 +1,89 @@
+class Player:
+    field num length, width, baseLength
+    field bool isMaxLength
+    field Vector start
+
+    init new(Vector newStart, num newLength, num newWidth) -> Player:
+        let length = newLength
+        let baseLength = newLength
+        let start = newStart
+        let width = newWidth
+        let isMaxLength = false
+        return self
+
+    method dispose() -> void:
+        do start.dispose()
+        do Memory.deAlloc(self)
+        return
+
+    method getLength() -> num:
+        return length
+    
+    method setLength(num newLength) -> void:
+        let length = newLength
+        return
+
+    method getWidth() -> num:
+        return width
+    
+    method setWidth(num newWidth) -> void:
+        let width = newWidth
+        return
+    
+    method getStart() -> Vector:
+        return start
+
+    method setStart(Vector newStart) -> void:
+        let start = newStart
+        return
+
+    method draw() -> void:
+        do Screen.setColor(true)
+        do Screen.drawRectangle(start.getX(), start.getY(), start.getX() + width, start.getY() + length)
+        return
+
+    method erase() -> void:
+        do Screen.setColor(false)
+        do Screen.drawRectangle(start.getX(), start.getY(), start.getX() + width, start.getY() + length)
+        return
+
+    method moveUp() -> void:
+        if (start.getY() > 1):
+            do Screen.setColor(false)
+            do Screen.drawRectangle(start.getX(), (start.getY() + length) - 1, start.getX() + width, start.getY() + length)
+            do start.setY(start.getY() - 2)
+            do Screen.setColor(true)
+            do Screen.drawRectangle(start.getX(), start.getY(), start.getX() + width, start.getY() + 1)
+        return
+
+    method moveDown() -> void:
+        if ((start.getY() + length) < 254):
+            do Screen.setColor(false)
+            do Screen.drawRectangle(start.getX(), start.getY(), start.getX() + width, start.getY() + 1)
+            do start.setY(start.getY() + 2)
+            do Screen.setColor(true)
+            do Screen.drawRectangle(start.getX(), (start.getY() + length) - 1, start.getX() + width, start.getY() + length)
+        return
+
+    method increaseSize() -> void:
+        if (length < 253):
+            do erase()
+            if (start.getY() > 1):
+                do start.setY(start.getY() - 1)
+            let length = length + 1
+            do draw()
+        else:
+            let isMaxLength = true
+        return
+
+    method resetSize() -> void:
+        do erase()
+
+        let length = baseLength
+        let isMaxLength = false
+        
+        do draw()
+        return
+
+    method getIsMaxLength() -> bool:
+        return isMaxLength

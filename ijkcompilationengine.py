@@ -49,6 +49,8 @@ class IjkCompilationEngine(object):
         self._compile_class_subroutines(ijk_class)
 
         self.lexer.token()  # DEDENT
+        
+        print("Compilation Ended Successfully!")
 
     def _compile_class_vars(self, ijk_class: IjkClass) -> None:
         token = self.lexer.current_token()

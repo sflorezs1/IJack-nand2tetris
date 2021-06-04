@@ -71,7 +71,7 @@ Please note that the compiler won't tell in most cases if it finds an error, it 
 This programming language works basically in the same way as Jack besides some minor changes in structure, some of those changes are:
 
 - The language now works with indentations instead of curly braces, each indented block start when a colon is used.
-- The language does not use colons as eol indicator, instead uses linebreaks (\\n).
+- The language does not use semicolons as eol indicator, instead uses linebreaks (\\n).
 - <code>constructor</code> function kind is now <code>init</code> .
 - <code>function</code> function kind is now <code>fun</code>.
 - <code>int</code> is now <code>num</code>.

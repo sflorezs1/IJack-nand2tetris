@@ -1,0 +1,7 @@
+class Main:
+    fun main() -> void:
+        do Screen.setColor(true)
+        do IDraw.drawEmptyRectangle(0,0,300,240,5)
+        #do IDraw.drawLog(10,60,3)
+        return
+    

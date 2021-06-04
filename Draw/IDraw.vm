@@ -1,0 +1,356 @@
+function IDraw.new 0
+push constant 0
+call Memory.alloc 1
+pop pointer 0
+push pointer 0
+return
+function IDraw.dispose 0
+push argument 0
+pop pointer 0
+push pointer 0
+call Memory.deAlloc 1
+pop temp 0
+push constant 0
+return
+function IDraw.drawEmptyRectangle 1
+push constant 0
+pop local 0
+label L0
+push local 0
+push argument 4
+lt
+not
+if-goto L1
+push argument 0
+push argument 1
+push local 0
+add
+push argument 2
+push argument 1
+push local 0
+add
+call Screen.drawLine 4
+pop temp 0
+push argument 0
+push argument 3
+push local 0
+sub
+push argument 2
+push argument 3
+push local 0
+sub
+call Screen.drawLine 4
+pop temp 0
+push argument 0
+push local 0
+add
+push argument 1
+push argument 0
+push local 0
+add
+push argument 3
+call Screen.drawLine 4
+pop temp 0
+push argument 2
+push local 0
+sub
+push argument 1
+push argument 2
+push local 0
+sub
+push argument 3
+call Screen.drawLine 4
+pop temp 0
+push local 0
+push constant 1
+add
+pop local 0
+goto L0
+label L1
+push constant 0
+return
+function IDraw.drawLog 0
+push argument 0
+push argument 1
+push argument 0
+push argument 1
+push constant 20
+push argument 2
+call Math.multiply 2
+add
+call Screen.drawLine 4
+pop temp 0
+push argument 0
+push constant 5
+push argument 2
+call Math.multiply 2
+add
+push argument 1
+push constant 10
+push argument 2
+call Math.multiply 2
+add
+push argument 0
+push constant 5
+push argument 2
+call Math.multiply 2
+add
+push argument 1
+push constant 20
+push argument 2
+call Math.multiply 2
+add
+call Screen.drawLine 4
+pop temp 0
+push argument 0
+push constant 5
+push argument 2
+call Math.multiply 2
+add
+push argument 1
+push constant 20
+push argument 2
+call Math.multiply 2
+add
+push argument 0
+push constant 10
+push argument 2
+call Math.multiply 2
+add
+push argument 1
+push constant 20
+push argument 2
+call Math.multiply 2
+add
+call Screen.drawLine 4
+pop temp 0
+push argument 0
+push constant 10
+push argument 2
+call Math.multiply 2
+add
+push argument 1
+push constant 20
+push argument 2
+call Math.multiply 2
+add
+push argument 0
+push constant 10
+push argument 2
+call Math.multiply 2
+add
+push argument 1
+call Screen.drawLine 4
+pop temp 0
+push argument 0
+push constant 15
+push argument 2
+call Math.multiply 2
+add
+push argument 1
+push constant 20
+push argument 2
+call Math.multiply 2
+add
+push argument 0
+push constant 17
+push argument 2
+call Math.multiply 2
+add
+push argument 1
+call Screen.drawLine 4
+pop temp 0
+push argument 0
+push constant 17
+push argument 2
+call Math.multiply 2
+add
+push argument 1
+push argument 0
+push constant 20
+push argument 2
+call Math.multiply 2
+add
+push argument 1
+push constant 20
+push argument 2
+call Math.multiply 2
+add
+call Screen.drawLine 4
+pop temp 0
+push argument 0
+push constant 16
+push argument 2
+call Math.multiply 2
+add
+push argument 1
+push constant 10
+push argument 2
+call Math.multiply 2
+add
+push argument 0
+push constant 19
+push argument 2
+call Math.multiply 2
+add
+push argument 1
+push constant 10
+push argument 2
+call Math.multiply 2
+add
+call Screen.drawLine 4
+pop temp 0
+push argument 0
+push constant 25
+push argument 2
+call Math.multiply 2
+add
+push argument 1
+push argument 0
+push constant 30
+push argument 2
+call Math.multiply 2
+add
+push argument 1
+call Screen.drawLine 4
+pop temp 0
+push argument 0
+push constant 25
+push argument 2
+call Math.multiply 2
+add
+push argument 1
+push argument 0
+push constant 25
+push argument 2
+call Math.multiply 2
+add
+push argument 1
+push constant 20
+push argument 2
+call Math.multiply 2
+add
+call Screen.drawLine 4
+pop temp 0
+push argument 0
+push constant 25
+push argument 2
+call Math.multiply 2
+add
+push argument 1
+push constant 20
+push argument 2
+call Math.multiply 2
+add
+push argument 0
+push constant 30
+push argument 2
+call Math.multiply 2
+add
+push argument 1
+push constant 20
+push argument 2
+call Math.multiply 2
+add
+call Screen.drawLine 4
+pop temp 0
+push argument 0
+push constant 35
+push argument 2
+call Math.multiply 2
+add
+push argument 1
+push argument 0
+push constant 35
+push argument 2
+call Math.multiply 2
+add
+push argument 1
+push constant 20
+push argument 2
+call Math.multiply 2
+add
+call Screen.drawLine 4
+pop temp 0
+push argument 0
+push constant 35
+push argument 2
+call Math.multiply 2
+add
+push argument 1
+push constant 10
+push argument 2
+call Math.multiply 2
+add
+push argument 0
+push constant 40
+push argument 2
+call Math.multiply 2
+add
+push argument 1
+call Screen.drawLine 4
+pop temp 0
+push argument 0
+push constant 35
+push argument 2
+call Math.multiply 2
+add
+push argument 1
+push constant 10
+push argument 2
+call Math.multiply 2
+add
+push argument 0
+push constant 40
+push argument 2
+call Math.multiply 2
+add
+push argument 1
+push constant 20
+push argument 2
+call Math.multiply 2
+add
+call Screen.drawLine 4
+pop temp 0
+push argument 0
+push constant 45
+push argument 2
+call Math.multiply 2
+add
+push argument 1
+push argument 0
+push constant 45
+push argument 2
+call Math.multiply 2
+add
+push argument 1
+push constant 16
+push argument 2
+call Math.multiply 2
+add
+call Screen.drawRectangle 4
+pop temp 0
+push argument 0
+push constant 45
+push argument 2
+call Math.multiply 2
+add
+push argument 1
+push constant 18
+push argument 2
+call Math.multiply 2
+add
+push argument 0
+push constant 45
+push argument 2
+call Math.multiply 2
+add
+push argument 1
+push constant 20
+push argument 2
+call Math.multiply 2
+add
+call Screen.drawRectangle 4
+pop temp 0
+push constant 0
+return

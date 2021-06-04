@@ -1,0 +1,14 @@
+function Main.main 0
+push constant 0
+not
+call Screen.setColor 1
+pop temp 0
+push constant 0
+push constant 0
+push constant 300
+push constant 240
+push constant 5
+call IDraw.drawEmptyRectangle 5
+pop temp 0
+push constant 0
+return

@@ -1,0 +1,47 @@
+class IDraw:
+
+    init new() -> IDraw:
+        return self
+    
+
+    method dispose() -> void:
+        do Memory.deAlloc(self)
+        return
+    
+    fun drawEmptyRectangle(num x1, num y1, num x2, num y2, num counter) -> void:
+        var num c
+        let c = 0
+        while(c < counter):
+            do Screen.drawLine(x1,(y1+c),x2,(y1+c))
+            do Screen.drawLine(x1,(y2-c),x2,(y2-c))
+            do Screen.drawLine((x1+c),y1,(x1+c),y2)
+            do Screen.drawLine((x2-c),y1,(x2-c),y2)
+            let c = c + 1
+        
+        return
+    
+    fun drawLog(num x1, num y1, num size) -> void:
+        do Screen.drawLine(x1,y1,x1,y1+(20*size)) #I
+
+        do Screen.drawLine(x1+(5*size),y1+(10*size),x1+(5*size),y1+(20*size)) #J
+        do Screen.drawLine(x1+(5*size),y1+(20*size),x1+(10*size),y1+(20*size))
+        do Screen.drawLine(x1+(10*size),y1+(20*size),x1+(10*size),y1)
+
+        do Screen.drawLine(x1+(15*size),y1+(20*size),x1+(17*size),y1) #A
+        do Screen.drawLine(x1+(17*size),y1,x1+(20*size),y1+(20*size))
+        do Screen.drawLine(x1+(16*size),y1+(10*size),x1+(19*size),y1+(10*size))
+
+        do Screen.drawLine(x1+(25*size),y1,x1+(30*size),y1) #C
+        do Screen.drawLine(x1+(25*size),y1,x1+(25*size),y1+(20*size))
+        do Screen.drawLine(x1+(25*size),y1+(20*size),x1+(30*size),y1+(20*size))
+
+        do Screen.drawLine(x1+(35*size),y1,x1+(35*size),y1+(20*size)) #K
+        do Screen.drawLine(x1+(35*size),y1+(10*size),x1+(40*size),y1)
+        do Screen.drawLine(x1+(35*size),y1+(10*size),x1+(40*size),y1+(20*size))
+
+        do Screen.drawRectangle(x1+(45*size),y1,x1+(45*size),y1+(16*size)) #!
+        do Screen.drawRectangle(x1+(45*size),y1+(18*size),x1+(45*size),y1+(20*size))
+
+        return
+   
+

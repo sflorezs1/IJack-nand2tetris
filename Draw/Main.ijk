@@ -1,8 +1,26 @@
 class Main:
+    # Example Class
     fun main() -> void:
-        do Screen.setColor(true)
-        #do IDraw.drawEmptyRectangle(0,0,300,240,5)
-        #do IDraw.drawLog(10,60,3)
-        #do IDraw.drawEmptyTriangle(10,10,10,200,50,120)
+        var num x1, y1, x2, y2, w, r
+        var bool color
+
+        let color = true
+
+        let x1 = 0
+        let y1 = 0
+        let x2 = 511
+        let y2 = 254
+
+        while (x1 < 127 & y1 < 63):
+            let color = !color
+            do Screen.setColor(color)
+            do IDraw.drawEmptyRectangle(x1, y1, x2, y2, 2)
+            let x1 = x1 + 2
+            let y1 = y1 + 2
+            let x2 = x2 - 2
+            let y2 = y2 - 2
+        do IDraw.drawEmptyTriangle(x1 + 35, y1, x1 + 5, y2 - 5, x1 + 70 , y2 - 5)
+        do IDraw.drawLog(x1 + 80, y1 + 12, 5)
+        do IDraw.drawEmptyTriangle(x1 + 342, y1, x1 + 312, y2 - 5, x1 + 377 , y2 - 5)
         return
-    
+

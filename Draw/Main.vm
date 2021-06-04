@@ -1,14 +1,100 @@
-function Main.main 0
+function Main.main 7
 push constant 0
 not
+pop local 6
+push constant 0
+pop local 0
+push constant 0
+pop local 1
+push constant 511
+pop local 2
+push constant 254
+pop local 3
+label L2
+push local 0
+push constant 127
+lt
+push local 1
+and
+push constant 63
+lt
+not
+if-goto L3
+push local 6
+not
+pop local 6
+push local 6
 call Screen.setColor 1
 pop temp 0
-push constant 0
-push constant 0
-push constant 300
-push constant 240
-push constant 5
+push local 0
+push local 1
+push local 2
+push local 3
+push constant 2
 call IDraw.drawEmptyRectangle 5
+pop temp 0
+push local 0
+push constant 2
+add
+pop local 0
+push local 1
+push constant 2
+add
+pop local 1
+push local 2
+push constant 2
+sub
+pop local 2
+push local 3
+push constant 2
+sub
+pop local 3
+goto L2
+label L3
+push local 0
+push constant 35
+add
+push local 1
+push local 0
+push constant 5
+add
+push local 3
+push constant 5
+sub
+push local 0
+push constant 70
+add
+push local 3
+push constant 5
+sub
+call IDraw.drawEmptyTriangle 6
+pop temp 0
+push local 0
+push constant 80
+add
+push local 1
+push constant 12
+add
+push constant 5
+call IDraw.drawLog 3
+pop temp 0
+push local 0
+push constant 342
+add
+push local 1
+push local 0
+push constant 312
+add
+push local 3
+push constant 5
+sub
+push local 0
+push constant 377
+add
+push local 3
+push constant 5
+sub
+call IDraw.drawEmptyTriangle 6
 pop temp 0
 push constant 0
 return

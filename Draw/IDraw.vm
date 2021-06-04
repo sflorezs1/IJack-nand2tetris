@@ -354,3 +354,24 @@ call Screen.drawRectangle 4
 pop temp 0
 push constant 0
 return
+function IDraw.drawEmptyTriangle 0
+push argument 0
+push argument 1
+push argument 2
+push argument 3
+call Screen.drawLine 4
+pop temp 0
+push argument 0
+push argument 1
+push argument 4
+push argument 5
+call Screen.drawLine 4
+pop temp 0
+push argument 2
+push argument 3
+push argument 4
+push argument 5
+call Screen.drawLine 4
+pop temp 0
+push constant 0
+return

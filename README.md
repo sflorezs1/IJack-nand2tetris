@@ -101,9 +101,9 @@ All functions in IJack follow the following pattern:
     <function-body>
 ```
 There are three function kinds in IJack:
-    - <code>init</code>: used as a constructor or initializer for the class, each class must only have one initializer and the function name must always be <code>new</code>, return type is always the classname.
-    - <code>fun</code>: represents a class level static function.
-    - <code>method</code>: defines a behaviour for an instance of the class.
+        - <code>init</code>: used as a constructor or initializer for the class, each class must only have one initializer and the function name must always be <code>new</code>, return type is always the classname.
+        - <code>fun</code>: represents a class level static function.
+        - <code>method</code>: defines a behaviour for an instance of the class.
 
 The function body is where all calculations and calls are done, must always end with a <code>return</code>.
 
